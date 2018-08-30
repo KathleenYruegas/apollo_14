@@ -2,8 +2,11 @@
 
 <div>
   <% @astronauts.each do |astro| %>
+  <div id="astro-<%= astro.id %>">
     <p><%= astro.name %></p>
     <p><%= astro.age %></p>
     <p><%= astro.job %></p>
+  </div>
   <% end %>
+  <p id='ave-age'><%= @average_age %></p>
 </div>

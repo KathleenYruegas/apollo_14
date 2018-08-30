@@ -17,4 +17,15 @@ describe Astronaut, type: :model do
       expect(Astronaut.average_age).to eq(target)
     end
   end
+
+  describe 'instance methods' do
+    it "#mission_list" do
+      astro = Astronaut.create!(name: "Neil Armstrong", age: 32, job: "Commander")
+      space_mission_1 = astro.space_missions.create(title: "Jupiter")
+      space_mission_2 = astro.space_missions.create(title: "Mars")
+      space_mission_3 = astro.space_missions.create(title: "Apollo")
+
+      expect(astro.mission_list).to eq(["Apollo", "Jupiter", "Mars"])
+    end 
+  end
 end

@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180706181538) do
+ActiveRecord::Schema.define(version: 20180830145903) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "astronaut_space_missions", force: :cascade do |t|
+    t.text "name"
+    t.bigint "astronaut_id"
+    t.bigint "space_mission_id"
+    t.index ["astronaut_id"], name: "index_astronaut_space_missions_on_astronaut_id"
+    t.index ["space_mission_id"], name: "index_astronaut_space_missions_on_space_mission_id"
+  end
 
   create_table "astronauts", force: :cascade do |t|
     t.string "name"
@@ -26,4 +34,6 @@ ActiveRecord::Schema.define(version: 20180706181538) do
     t.integer "trip_length"
   end
 
+  add_foreign_key "astronaut_space_missions", "astronauts"
+  add_foreign_key "astronaut_space_missions", "space_missions"
 end

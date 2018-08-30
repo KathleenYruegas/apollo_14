@@ -21,11 +21,21 @@ describe Astronaut, type: :model do
   describe 'instance methods' do
     it "#mission_list" do
       astro = Astronaut.create!(name: "Neil Armstrong", age: 32, job: "Commander")
-      space_mission_1 = astro.space_missions.create(title: "Jupiter")
-      space_mission_2 = astro.space_missions.create(title: "Mars")
-      space_mission_3 = astro.space_missions.create(title: "Apollo")
+      space_mission_1 = astro.space_missions.create(title: "Jupiter", trip_length: 30)
+      space_mission_2 = astro.space_missions.create(title: "Mars", trip_length: 22)
+      space_mission_3 = astro.space_missions.create(title: "Apollo", trip_length: 90)
 
       expect(astro.mission_list).to eq(["Apollo", "Jupiter", "Mars"])
-    end 
+    end
+
+    it '#space_time' do
+      astro = Astronaut.create!(name: "Neil Armstrong", age: 32, job: "Commander")
+      sm_1 = astro.space_missions.create(title: "Jupiter", trip_length: 30)
+      sm_2 = astro.space_missions.create(title: "Mars", trip_length: 22)
+      sm_3 = astro.space_missions.create(title: "Apollo", trip_length: 90)
+
+      target = (sm_1.trip_length + sm_2.trip_length + sm_3.trip_length)
+      expect(astro.space_time).to eq(target)
+    end
   end
 end
